@@ -6,6 +6,11 @@ import time
 # Ensure FastAPI starts inside Streamlit
 FASTAPI_URL = "http://127.0.0.1:8000"
 
+# Ensure FastAPI is started only once
+if "fastapi_started" not in st.session_state:
+    st.session_state["fastapi_started"] = True
+    subprocess.Popen(["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"])
+
 # Function to run FastAPI
 def run_fastapi():
     subprocess.Popen(["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"])

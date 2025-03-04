@@ -31,7 +31,7 @@ def translate_search(query_text: str, target_language: str):
 
 # Function to run FastAPI inside Streamlit
 def run_fastapi():
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8500)
 
 # Start FastAPI server in a separate thread
 fastapi_thread = threading.Thread(target=run_fastapi, daemon=True)
