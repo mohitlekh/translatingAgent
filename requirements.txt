@@ -1,5 +1,7 @@
 fastapi
 uvicorn
+streamlit
+requests
 faiss-cpu
 sentence-transformers
 langchain
@@ -7,4 +9,3 @@ deep-translator
 google-generativeai
 python-docx
 pdfplumber
-numpy

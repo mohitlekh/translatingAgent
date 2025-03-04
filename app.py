@@ -1,11 +1,12 @@
 import streamlit as st
 import requests
+import subprocess
+import threading
 import os
 
-# FastAPI backend URL (Replace with your deployed FastAPI URL)
-FASTAPI_URL = "http://127.0.0.1:8000"  # Change this if running on Google Cloud Run
+# Ensure FastAPI starts inside Streamlit
+FASTAPI_URL = "http://127.0.0.1:8000"
 
-# Streamlit UI
 st.set_page_config(page_title="AI-Powered Document Search & Translation", layout="wide")
 
 st.title("📄 AI-Powered Document Search & Translation")
@@ -42,3 +43,13 @@ if uploaded_file:
         f.write(uploaded_file.getbuffer())
 
     st.success(f"✅ {uploaded_file.name} uploaded successfully!")
+
+# Function to run FastAPI inside Streamlit
+def run_fastapi():
+    subprocess.Popen(["python", "main.py"])
+
+# Start FastAPI server in a separate thread
+if "fastapi_started" not in st.session_state:
+    st.session_state["fastapi_started"] = True
+    fastapi_thread = threading.Thread(target=run_fastapi, daemon=True)
+    fastapi_thread.start()
