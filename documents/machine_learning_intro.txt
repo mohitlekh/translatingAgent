@@ -1,0 +1,2 @@
+Machine Learning (ML) is a branch of artificial intelligence (AI) that focuses on building systems that can learn from data and improve their performance over time without being explicitly programmed. 
+ML is widely used in various fields such as healthcare, finance, and e-commerce for predictive analytics, automation, and decision-making.
