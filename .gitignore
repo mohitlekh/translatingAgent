@@ -1,0 +1,57 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Virtual environment
+venv/
+env/
+*.venv
+
+# Distribution / packaging
+.Python
+dist/
+build/
+*.egg-info/
+
+# Logs and databases
+*.log
+db.sqlite3
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Testing
+.coverage
+.tox/
+.nox/
+.pytest_cache/
+
+# MyPy
+.mypy_cache/
+
+# VS Code settings
+.vscode/
+
+# PyCharm settings
+.idea/
+
+# MacOS system files
+.DS_Store
+
+# Ignore environment variables and secrets
+.env
+.env.local
+.secrets/
+
+# Docker
+*.dockerfile
+docker-compose.override.yml
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
