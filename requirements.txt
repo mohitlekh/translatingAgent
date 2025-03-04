@@ -9,4 +9,3 @@ deep-translator
 google-generativeai
 python-docx
 pdfplumber
-uvicorn
