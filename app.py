@@ -3,15 +3,24 @@ import requests
 import threading
 import time
 import uvicorn
+import asyncio
 from main import app  # ✅ Import FastAPI app
 
-# ✅ FastAPI URL (running inside Streamlit)
-FASTAPI_URL = "http://127.0.0.1:8000"
+# ✅ Use FastAPI on port `8500`
+FASTAPI_URL = "http://127.0.0.1:8500"
+
+# ✅ Function to run FastAPI without event loop conflicts
+def run_fastapi():
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    config = uvicorn.Config(app, host="0.0.0.0", port=8500, loop="asyncio")
+    server = uvicorn.Server(config)
+    server.run()
 
 # ✅ Start FastAPI inside Streamlit only once
 if "fastapi_started" not in st.session_state:
     st.session_state["fastapi_started"] = True
-    threading.Thread(target=uvicorn.run, args=(app,), kwargs={"host": "0.0.0.0", "port": 8000}, daemon=True).start()
+    threading.Thread(target=run_fastapi, daemon=True).start()
     time.sleep(3)  # ✅ Give FastAPI time to start
 
 st.set_page_config(page_title="AI-Powered Document Search & Translation", layout="wide")

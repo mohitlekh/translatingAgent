@@ -74,7 +74,7 @@ def translate_search(query_text: str, target_language: str):
 
 # ✅ Start FastAPI inside Streamlit (No subprocess issues!)
 def run_fastapi():
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8050)
 
 fastapi_thread = threading.Thread(target=run_fastapi, daemon=True)
 fastapi_thread.start()
