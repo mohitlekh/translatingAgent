@@ -3,7 +3,7 @@ import requests
 import os
 
 # FastAPI backend URL (Replace with your deployed FastAPI URL)
-FASTAPI_URL = "http://127.0.0.1:8000"  # Change this if running on Google Cloud Run
+FASTAPI_URL = "http://127.0.0.1:80"  # Change this if running on Google Cloud Run
 
 # Streamlit UI
 st.set_page_config(page_title="AI-Powered Document Search & Translation", layout="wide")
