@@ -4,7 +4,7 @@ import requests
 import time
 
 # Ensure FastAPI starts inside Streamlit
-FASTAPI_URL = "http://127.0.0.1:8000"
+FASTAPI_URL = "https://translateme.streamlit.app"
 
 # Ensure FastAPI is started only once
 if "fastapi_started" not in st.session_state:
