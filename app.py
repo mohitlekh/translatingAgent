@@ -1,12 +1,21 @@
 import streamlit as st
 import requests
+import threading
+import time
+import uvicorn
+from main import app  # ✅ Import FastAPI app
 
-# ✅ Use FastAPI running inside Streamlit
+# ✅ FastAPI URL (running inside Streamlit)
 FASTAPI_URL = "http://127.0.0.1:8000"
 
-st.set_page_config(page_title="AI-Powered Document Search & Translation", layout="wide")
+# ✅ Start FastAPI inside Streamlit only once
+if "fastapi_started" not in st.session_state:
+    st.session_state["fastapi_started"] = True
+    threading.Thread(target=uvicorn.run, args=(app,), kwargs={"host": "0.0.0.0", "port": 8000}, daemon=True).start()
+    time.sleep(3)  # ✅ Give FastAPI time to start
 
-st.title("📄 AI-Powered Document Search & Translation")
+st.set_page_config(page_title="AI-Powered Document Search & Translation", layout="wide")
+st.title("📄 AI-Powered Document Search & Translation (Powered by Gemini AI)")
 
 # 📤 **File Upload Section**
 st.subheader("📤 Upload a Document for Indexing")
@@ -41,7 +50,7 @@ if st.button("🔎 Search & Translate"):
                 download_url = response.json().get("download_url")
 
                 if download_url:
-                    st.success("✅ Translation Completed! Click below to download.")
+                    st.success("✅ Gemini AI Translation Completed! Click below to download.")
                     st.markdown(f"[📥 Click to Download]({download_url})", unsafe_allow_html=True)
                 else:
                     st.error("❌ Failed to retrieve download link.")
