@@ -1,16 +1,33 @@
 import streamlit as st
 import requests
 
-# ✅ Use localhost since FastAPI is running inside Streamlit
+# ✅ Use FastAPI running inside Streamlit
 FASTAPI_URL = "http://127.0.0.1:8000"
 
 st.set_page_config(page_title="AI-Powered Document Search & Translation", layout="wide")
 
 st.title("📄 AI-Powered Document Search & Translation")
 
+# 📤 **File Upload Section**
+st.subheader("📤 Upload a Document for Indexing")
+uploaded_file = st.file_uploader("Choose a file", type=["txt", "pdf", "docx"])
+
+if uploaded_file:
+    with st.spinner("Uploading..."):
+        response = requests.post(
+            f"{FASTAPI_URL}/upload-document/",
+            files={"file": (uploaded_file.name, uploaded_file.getvalue())}
+        )
+        
+        if response.status_code == 200:
+            st.success(f"✅ '{uploaded_file.name}' uploaded successfully!")
+        else:
+            st.error("❌ Failed to upload the file.")
+
 # 🔍 **Search & Translate Section**
-query_text = st.text_input("🔍 Enter a search query:")
-target_language = st.selectbox("🌍 Select Target Language:", ["fr", "de", "es", "it", "hi", "zh"])
+st.subheader("🔍 Search & Translate a Document")
+query_text = st.text_input("Enter a search query:")
+target_language = st.selectbox("Select Target Language:", ["fr", "de", "es", "it", "hi", "zh"])
 
 if st.button("🔎 Search & Translate"):
     if query_text:
