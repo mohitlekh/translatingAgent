@@ -9,3 +9,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
+# Expose port 8501 for Streamlit
+EXPOSE 80
+
+CMD ["python", "main.py"]
